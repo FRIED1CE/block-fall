@@ -1,13 +1,13 @@
-.Preview {
+.Hold {
     position: absolute;
     top: 0;
-    left: 63vw;
+    left: 32vw;
     background: rgba(0, 0, 0, 0.1);
     border: 5px solid rgba(0, 0, 0, 0);
     border-radius: 10px;
   }
   
-  .Preview-board {
+.Hold-board {
     display: grid;
     grid-gap: 2px;
     grid-template-rows: repeat(4, 1fr);

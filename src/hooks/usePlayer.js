@@ -13,6 +13,7 @@ const buildPlayer = (previous) => {
         .fill(0)
         .map((_) => randomTetromino());
     }
+    console.log(tetrominoes,"slap");
 
     return {
         collided: false,

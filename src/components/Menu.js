@@ -5,7 +5,7 @@ const Menu = ({ onClick }) => {
   return (
     <div className="Menu">
        <button className="Button" onClick={onClick}>
-           Play Tetris
+           Play BlockFall
         </button> 
     </div>
   )

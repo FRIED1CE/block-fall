@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import Preview from "../components/Preview";
+
 
 const buildGameStats = () => ({
     level: 1,

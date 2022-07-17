@@ -105,7 +105,6 @@ export const playerController = ({
     setGameOver
 }) => {
     if (!action) {
-        console.log("no action");
         return
     };
 
