@@ -9,13 +9,13 @@ import BoardCell from "./BoardCell";
 
 import  { useHold } from "../hooks/useHold";
 
-const Hold = () => {
-    
-    const { hold, setHold } = useHold();
+const Hold = ({ hold }) => {
     
     const { shape, className } = hold;
    
     const board = buildBoard({ rows: 4, columns: 4 });
+
+
 
     board.rows = transferToBoard({
         className,
@@ -38,5 +38,6 @@ const Hold = () => {
     );
 
 };
+
 
 export default React.memo(Hold);

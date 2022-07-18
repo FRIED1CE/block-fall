@@ -9,15 +9,16 @@ import { useInterval } from "../hooks/useInterval";
 import { useDropTime} from "../hooks/useDropTime";
 
 
-
 const GameController = ({
     board,
     gameStats,
     player,
     setGameOver,
-    setPlayer
+    setPlayer,
+    resetPlayer,
+    swapHold,
+    hold
 }) => {
-
     const [dropTime, pauseDropTime, resumeDropTime] = useDropTime({
         gameStats
     });
@@ -29,6 +30,7 @@ const GameController = ({
 
     const handleUserKeyPressdown = event => {
         const { key, keyCode } = event;
+
 
         const action = actionForKey(keyCode);
 
@@ -42,8 +44,7 @@ const GameController = ({
                 resumeDropTime();
             }
             return;
-        }
-
+        } 
         if (actionIsDrop(action)) pauseDropTime();
 
         handleInput(action);
@@ -79,7 +80,10 @@ const GameController = ({
             board,
             player,
             setPlayer,
-            setGameOver
+            setGameOver,
+            resetPlayer,
+            swapHold,
+            hold
         });
     };
 

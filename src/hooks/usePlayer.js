@@ -4,7 +4,6 @@ import { randomTetromino } from "../buisness/Tetrominoes"
 
 const buildPlayer = (previous) => {
     let tetrominoes;
-
     if (previous) {
         tetrominoes = [...previous.tetrominoes];
         tetrominoes.unshift(randomTetromino());
@@ -13,7 +12,7 @@ const buildPlayer = (previous) => {
         .fill(0)
         .map((_) => randomTetromino());
     }
-    console.log(tetrominoes,"slap");
+    
 
     return {
         collided: false,

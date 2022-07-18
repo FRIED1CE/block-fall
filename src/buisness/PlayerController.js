@@ -102,7 +102,10 @@ export const playerController = ({
     board,
     player,
     setPlayer,
-    setGameOver
+    setGameOver,
+    hold,
+    swapHold,
+    resetPlayer
 }) => {
     if (!action) {
         return
@@ -111,6 +114,23 @@ export const playerController = ({
     if (action === Action.Rotate) {
         attemptRotation({ board, player, setPlayer });
 
+    } else if (action === Action.Hold) {
+        if (hold.shape.length === 0) {
+            swapHold(player.tetromino);
+            resetPlayer();
+        } else {
+            const playerTetromino = hold;
+            swapHold(player.tetromino);
+            player.tetrominoes[4] = playerTetromino;
+
+            setPlayer({
+                collided: false,
+                isFastDropping: false,
+                position: { row: 0, column: 4 },
+                tetrominoes: player.tetrominoes,
+                tetromino: player.tetrominoes.pop()
+            });
+        }
     } else {
         attemptMovement({ board, player, setPlayer, action, setGameOver });
     }

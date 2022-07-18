@@ -88,7 +88,7 @@ export const transferToBoard = ({
     rows,
     shape
 }) => {
-    shape.forEach((row,y) => {
+  shape.forEach((row,y) => {
         row.forEach((cell, x) => {
             if (cell) {
                 const occupied = isOccupied;

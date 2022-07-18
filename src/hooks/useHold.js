@@ -1,25 +1,36 @@
 import { useState } from "react";
 
 const defaultGrid = {
-    shape: [
-      [0, 0],
-      [0, 0],
-    ],
+    shape: [],
     className: ""
 }
 
-const buildHold = (previous) => {
+const buildHold = (player) => {
     let tetromino;
+    let classname;
     
-    if (!previous) {
-        tetromino = Array(1).fill(0).map((_) => defaultGrid);
+    if (player) {
+        tetromino = player.shape;
+        classname = player.className;
+    }
+
+    else if (!player) {
+       tetromino = defaultGrid.shape;
+       classname = defaultGrid.className;
+    };
+
+    return {
+        shape: tetromino,
+        className: classname
     };
     
-    return tetromino.pop();
 }
 
 export const useHold = () => {
     const [ hold, setHold ] = useState(buildHold());
+    const swapHold = (player) => {
+        setHold(buildHold(player));
+    };
 
-    return { hold, setHold };
+    return { hold, setHold, swapHold };
 }
