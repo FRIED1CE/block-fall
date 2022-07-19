@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { resetShape } from "../buisness/Tetrominoes"
 
 const defaultGrid = {
     shape: [],
@@ -10,20 +11,27 @@ const buildHold = (player) => {
     let classname;
     
     if (player) {
-        tetromino = player.shape;
-        classname = player.className;
+        resetShape({player});
+        tetromino = player.tetromino.shape;
+        classname = player.tetromino.className;
+        
+        return {
+            shape: tetromino,
+            className: classname,
+            key: player.count
+        };
     }
 
     else if (!player) {
-       tetromino = defaultGrid.shape;
-       classname = defaultGrid.className;
+        tetromino = defaultGrid.shape;
+        classname = defaultGrid.className;
+       
+       return {
+        shape: tetromino,
+        className: classname,
+        };
     };
 
-    return {
-        shape: tetromino,
-        className: classname
-    };
-    
 }
 
 export const useHold = () => {
@@ -31,6 +39,5 @@ export const useHold = () => {
     const swapHold = (player) => {
         setHold(buildHold(player));
     };
-
     return { hold, setHold, swapHold };
 }

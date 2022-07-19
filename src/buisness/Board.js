@@ -31,7 +31,7 @@ const findDropPosistion = ({ board, position, shape }) => {
     return { ...position, row };
 }
 
-export const nextBoard = ({ board, player, resetPlayer, addLinesCleared}) => {
+export const nextBoard = ({ board, player, resetPlayer, addLinesCleared }) => {
     const { tetromino, position } = player;
     
     //copy and clear spaces used by pieces that

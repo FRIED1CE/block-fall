@@ -81,6 +81,24 @@ export const rotate = ({ piece, direction}) => {
     return newPiece.reverse();
 }
 
+export const resetShape = ({player}) => {
+  if (player.tetromino.className.includes("__i")) {
+    player.tetromino.shape = TETROMINOES.I.shape;
+  }else if (player.tetromino.className.includes("__j")) {
+    player.tetromino.shape = TETROMINOES.J.shape;
+  }else if (player.tetromino.className.includes("__l")) {
+    player.tetromino.shape = TETROMINOES.L.shape;
+  }else if (player.tetromino.className.includes("__o")) {
+    player.tetromino.shape = TETROMINOES.O.shape;
+  }else if (player.tetromino.className.includes("__s")) {
+    player.tetromino.shape = TETROMINOES.S.shape;
+  }else if (player.tetromino.className.includes("__t")) {
+    player.tetromino.shape = TETROMINOES.T.shape;
+  }else if (player.tetromino.className.includes("__z")) {
+    player.tetromino.shape = TETROMINOES.Z.shape;
+  }
+}
+
 export const transferToBoard = ({
     className,
     isOccupied,

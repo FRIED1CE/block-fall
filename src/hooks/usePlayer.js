@@ -2,29 +2,44 @@ import { useState, useCallback } from "react";
 
 import { randomTetromino } from "../buisness/Tetrominoes"
 
-const buildPlayer = (previous) => {
+const buildPlayer = (previous, count) => {
+    
     let tetrominoes;
     if (previous) {
         tetrominoes = [...previous.tetrominoes];
         tetrominoes.unshift(randomTetromino());
+        const key = previous.key + 1;
+        return {
+            collided: false,
+            isFastDropping: false,
+            position: { row: 0, column: 4 },
+            tetrominoes,
+            tetromino: tetrominoes.pop(),
+            key
+        };
     } else {
         tetrominoes = Array(5)
         .fill(0)
         .map((_) => randomTetromino());
+
+        return {
+            collided: false,
+            isFastDropping: false,
+            position: { row: 0, column: 4 },
+            tetrominoes,
+            tetromino: tetrominoes.pop(),
+            key: count
+        };
     }
     
 
-    return {
-        collided: false,
-        isFastDropping: false,
-        position: { row: 0, column: 4 },
-        tetrominoes,
-        tetromino: tetrominoes.pop()
-    };
+
 };
 
 export const usePlayer = () => {
-    const [player, setPlayer] = useState(buildPlayer());
+    let count = 0
+
+    const [player, setPlayer] = useState(buildPlayer(null, count));
 
     const resetPlayer = useCallback(() => {
         setPlayer((prev) => buildPlayer(prev));

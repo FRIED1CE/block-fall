@@ -1,4 +1,4 @@
-import { rotate } from "./Tetrominoes"
+import { rotate} from "./Tetrominoes"
 import { Action } from "./Input";
 import { hasCollision, isWithinBoard } from "./Board"; 
 
@@ -97,6 +97,32 @@ const attemptMovement = ({
 };
 
 
+const attemptHold = ({
+    hold,
+    swapHold,
+    player,
+    setPlayer
+}) => {
+    let previousHold = hold.key;
+    
+    if (previousHold === hold.key && previousHold === player.key){
+        return
+    }else {
+        previousHold = hold.key;
+        const playerTetromino = hold;
+        swapHold(player);
+        player.tetrominoes[4] = playerTetromino;
+    }
+
+    setPlayer({
+        collided: false,
+        isFastDropping: false,
+        position: { row: 0, column: 4 },
+        tetrominoes: player.tetrominoes,
+        tetromino: player.tetrominoes.pop()
+    });
+}
+
 export const playerController = ({
     action,
     board,
@@ -116,20 +142,17 @@ export const playerController = ({
 
     } else if (action === Action.Hold) {
         if (hold.shape.length === 0) {
-            swapHold(player.tetromino);
+            swapHold(player);
             resetPlayer();
-        } else {
-            const playerTetromino = hold;
-            swapHold(player.tetromino);
-            player.tetrominoes[4] = playerTetromino;
 
-            setPlayer({
-                collided: false,
-                isFastDropping: false,
-                position: { row: 0, column: 4 },
-                tetrominoes: player.tetrominoes,
-                tetromino: player.tetrominoes.pop()
+        } else {
+            attemptHold({
+                hold,
+                swapHold,
+                player,
+                setPlayer,
             });
+
         }
     } else {
         attemptMovement({ board, player, setPlayer, action, setGameOver });

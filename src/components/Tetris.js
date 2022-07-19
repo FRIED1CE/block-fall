@@ -14,7 +14,6 @@ import { useHold } from "../hooks/useHold";
 const Tetris = ({rows, columns, setGameOver}) => {
 
 
-    const { hold, setHold, swapHold } = useHold();
     
     const [gameStats, addLinesCleared] = useGameStats();
     const [player, setPlayer, resetPlayer] = usePlayer();
@@ -26,6 +25,7 @@ const Tetris = ({rows, columns, setGameOver}) => {
          addLinesCleared
     });
 
+    const { hold, setHold, swapHold } = useHold();
 
     return (
         <div className="Tetris">
