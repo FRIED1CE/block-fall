@@ -31,7 +31,7 @@ const findDropPosistion = ({ board, position, shape }) => {
     return { ...position, row };
 }
 
-export const nextBoard = ({ board, player, resetPlayer, addLinesCleared }) => {
+export const nextBoard = ({ board, player, resetPlayer, addLinesCleared, count, setCount }) => {
     const { tetromino, position } = player;
     
     //copy and clear spaces used by pieces that
@@ -86,10 +86,26 @@ export const nextBoard = ({ board, player, resetPlayer, addLinesCleared }) => {
         addLinesCleared(linesCleared);
     }
 
-
+    
+    // if (player.collided){
+    //     if (count === 0){
+    //         setCount(1);
+    //         return {
+    //             rows,
+    //             size: { ...board.size }
+    //         };
+            
+    //     }else if (count === 1) {
+    //         setCount(0)
+    //         resetPlayer();
+    //     }
+    // }else if (player.isFastDropping) {
+    //     resetPlayer();
+    // };
     if (player.collided || player.isFastDropping) {
         resetPlayer();
-    };
+    }
+    
 
     //return the next board
     return {
