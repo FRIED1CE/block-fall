@@ -1,12 +1,21 @@
 import { rotate} from "./Tetrominoes"
 import { Action } from "./Input";
 import { hasCollision, isWithinBoard } from "./Board"; 
+import { TETROMINOES } from "./Tetrominoes";
 
 const attemptRotation = ({ board, player, setPlayer }) => {
-    const shape = rotate({
-        piece: player.tetromino.shape,
-        direction: 1
-    });   
+    let shape;
+    let rotation;
+    if (player.tetromino.type == "O"){
+        return;
+    }
+    if (player.rotation === 3){
+            shape = TETROMINOES[player.tetromino.type][0].shape;
+            rotation = 0;
+    }else {  
+        shape = TETROMINOES[player.tetromino.type][player.rotation + 1].shape;
+        rotation = player.rotation + 1
+    }
 
     const position = player.position;
     const isValidRotation = 
@@ -16,6 +25,7 @@ const attemptRotation = ({ board, player, setPlayer }) => {
     if (isValidRotation) {
         setPlayer({
             ...player,
+            rotation,
             tetromino: {
                 ...player.tetromino,
                 shape

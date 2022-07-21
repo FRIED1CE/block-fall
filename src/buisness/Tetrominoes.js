@@ -1,101 +1,286 @@
 const className = "tetromino";
 
 export const TETROMINOES = {
-    I: {
-      shape: [
-        [0, 1, 0, 0],
-        [0, 1, 0, 0],
-        [0, 1, 0, 0],
-        [0, 1, 0, 0]
-      ],
-      className: `${className} ${className}__i`
-    },
-    J: {
+  I: [
+       {
+        shape: [
+          [0, 1, 0, 0],
+          [0, 1, 0, 0],
+          [0, 1, 0, 0],
+          [0, 1, 0, 0]
+        ],
+        className: `${className} ${className}__i`,
+        type : "I"
+      },
+      {
+        shape: [
+          [0, 0, 0, 0],
+          [1, 1, 1, 1],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        className: `${className} ${className}__i`,
+        type : "I"
+      },
+      {
+        shape: [
+          [0, 0, 1, 0],
+          [0, 0, 1, 0],
+          [0, 0, 1, 0],
+          [0, 0, 1, 0]
+        ],
+        className: `${className} ${className}__i`,
+        type : "I"
+      },
+      {
+        shape: [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [1, 1, 1, 1],
+          [0, 0, 0, 0]
+        ],
+        className: `${className} ${className}__i`,
+        type : "I"
+      },
+  ],
+
+  J: [
+    {
       shape: [
         [0, 1, 0],
         [0, 1, 0],
         [1, 1, 0]
       ],
-      className: `${className} ${className}__j`
+      className: `${className} ${className}__j`,
+      type : "J"
     },
-    L: {
+    {
+      shape: [
+        [1, 0, 0],
+        [1, 1, 1],
+        [0, 0, 0]
+      ],
+      className: `${className} ${className}__j`,
+      type : "J"
+    },
+    {
+      shape: [
+        [0, 1, 1],
+        [0, 1, 0],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__j`,
+      type : "J"
+    },
+    {
+      shape: [
+        [0, 0, 0],
+        [1, 1, 1],
+        [0, 0, 1]
+      ],
+      className: `${className} ${className}__j`,
+      type : "J"
+    },
+],
+  L: [
+    {
       shape: [
         [0, 1, 0],
         [0, 1, 0],
         [0, 1, 1]
       ],
-      className: `${className} ${className}__l`
+      className: `${className} ${className}__l`,
+      type : "L"
     },
-    O: {
+    {
+      shape: [
+        [0, 0, 0],
+        [1, 1, 1],
+        [1, 0, 0]
+      ],
+      className: `${className} ${className}__l`,
+      type : "L"
+    },
+    {
+      shape: [
+        [1, 1, 0],
+        [0, 1, 0],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__l`,
+      type : "L"
+    },
+    {
+      shape: [
+        [0, 0, 1],
+        [1, 1, 1],
+        [0, 0, 0]
+      ],
+      className: `${className} ${className}__l`,
+      type : "L"
+    },
+  ],
+  O: [
+    {
       shape: [
         [1, 1],
         [1, 1]
       ],
-      className: `${className} ${className}__o`
+      className: `${className} ${className}__o`,
+      type : "O"
     },
-    S: {
+  ],
+  S: [
+    {
       shape: [
         [0, 1, 1],
         [1, 1, 0],
         [0, 0, 0]
       ],
-      className: `${className} ${className}__s`
+      className: `${className} ${className}__s`,
+      type : "S"
     },
-    T: {
+    {
       shape: [
-        [1, 1, 1],
         [0, 1, 0],
+        [0, 1, 1],
+        [0, 0, 1]
+      ],
+      className: `${className} ${className}__s`,
+      type : "S"
+    },
+    {
+      shape: [
+        [0, 0, 0],
+        [0, 1, 1],
+        [1, 1, 0]
+      ],
+      className: `${className} ${className}__s`,
+      type : "S"
+    },
+    {
+      shape: [
+        [1, 0, 0],
+        [1, 1, 0],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__s`,
+      type : "S"
+    },
+  ],
+  T:[ 
+    {
+      shape: [
+        [0, 1, 0],
+        [1, 1, 1],
         [0, 0, 0]
       ],
-      className: `${className} ${className}__t`
+      className: `${className} ${className}__t`,
+      type : "T"
     },
-    Z: {
+    {
+      shape: [
+        [0, 1, 0],
+        [0, 1, 1],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__t`,
+      type : "T"
+    },
+    {
+      shape: [
+        [0, 0, 0],
+        [1, 1, 1],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__t`,
+      type : "T"
+    },
+    {
+      shape: [
+        [0, 1, 0],
+        [1, 1, 0],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__t`,
+      type : "T"
+    }
+  ],
+
+  Z: [
+    {
       shape: [
         [1, 1, 0],
         [0, 1, 1],
         [0, 0, 0]
       ],
-      className: `${className} ${className}__z`
-    }
+      className: `${className} ${className}__z`,
+      type : "Z"
+    },
+    {
+      shape: [
+        [0, 0, 1],
+        [0, 1, 1],
+        [0, 1, 0]
+      ],
+      className: `${className} ${className}__z`,
+      type : "Z"
+    },
+    {
+      shape: [
+        [0, 0, 0],
+        [1, 1, 0],
+        [0, 1, 1]
+      ],
+      className: `${className} ${className}__z`,
+      type : "Z"
+    },
+    {
+      shape: [
+        [0, 1, 0],
+        [1, 1, 0],
+        [1, 0, 0]
+      ],
+      className: `${className} ${className}__z`,
+      type : "Z"
+    },
+  ]
 };
 
 export const randomTetromino = () => {
-    const keys = Object.keys(TETROMINOES);
-    const index = Math.floor(Math.random() * keys.length);
-    const key = keys[index];
+  const keys = Object.keys(TETROMINOES);
+  const index = Math.floor(Math.random() * keys.length);
+  const key = keys[index];
 
-
-    return TETROMINOES[key];
-
+  return TETROMINOES[key][0];
 }
+// export const rotate = ({ piece, direction}) => {
+//     //transpose rows and columns
+//     const newPiece = piece.map((_, index) => 
+//         piece.map((column) => column[index])
+//     );
 
-export const rotate = ({ piece, direction}) => {
-    //transpose rows and columns
-    const newPiece = piece.map((_, index) => 
-        piece.map((column) => column[index])
-    );
-
-    //reverse rows to get rotated matrix
-    if (direction > 0) return newPiece.map((row) => row.reverse());
+//     //reverse rows to get rotated matrix
+//     if (direction > 0) return newPiece.map((row) => row.reverse());
     
-    return newPiece.reverse();
-}
+//     return newPiece.reverse();
+// }
 
 export const resetShape = ({player}) => {
   if (player.tetromino.className.includes("__i")) {
-    player.tetromino.shape = TETROMINOES.I.shape;
+    player.tetromino.shape = TETROMINOES.I[0].shape;
   }else if (player.tetromino.className.includes("__j")) {
-    player.tetromino.shape = TETROMINOES.J.shape;
+    player.tetromino.shape = TETROMINOES.J[0].shape;
   }else if (player.tetromino.className.includes("__l")) {
-    player.tetromino.shape = TETROMINOES.L.shape;
+    player.tetromino.shape = TETROMINOES.L[0].shape;
   }else if (player.tetromino.className.includes("__o")) {
-    player.tetromino.shape = TETROMINOES.O.shape;
+    player.tetromino.shape = TETROMINOES.O[0].shape;
   }else if (player.tetromino.className.includes("__s")) {
-    player.tetromino.shape = TETROMINOES.S.shape;
+    player.tetromino.shape = TETROMINOES.S[0].shape;
   }else if (player.tetromino.className.includes("__t")) {
-    player.tetromino.shape = TETROMINOES.T.shape;
+    player.tetromino.shape = TETROMINOES.T[0].shape;
   }else if (player.tetromino.className.includes("__z")) {
-    player.tetromino.shape = TETROMINOES.Z.shape;
+    player.tetromino.shape = TETROMINOES.Z[0].shape;
   }
 }
 

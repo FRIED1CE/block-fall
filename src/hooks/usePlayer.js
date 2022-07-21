@@ -15,7 +15,7 @@ const buildPlayer = (previous, count) => {
             position: { row: 0, column: 4 },
             tetrominoes,
             tetromino: tetrominoes.pop(),
-            key
+            rotation: 0
         };
     } else {
         tetrominoes = Array(5)
@@ -28,7 +28,8 @@ const buildPlayer = (previous, count) => {
             position: { row: 0, column: 4 },
             tetrominoes,
             tetromino: tetrominoes.pop(),
-            key: count
+            key: count,
+            rotation: 0
         };
     }
     
