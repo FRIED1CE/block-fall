@@ -2,7 +2,37 @@ const className = "tetromino";
 
 export const TETROMINOES = {
   I: [
-       {
+    {
+      shape: [
+        [0, 0, 0, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+      ],
+      className: `${className} ${className}__i`,
+      type : "I"
+    }, 
+    {
+      shape: [
+        [0, 0, 1, 0],
+        [0, 0, 1, 0],
+        [0, 0, 1, 0],
+        [0, 0, 1, 0]
+      ],
+      className: `${className} ${className}__i`,
+      type : "I"
+    },
+    {
+      shape: [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 0]
+      ],
+      className: `${className} ${className}__i`,
+      type : "I"
+    },  
+    {
         shape: [
           [0, 1, 0, 0],
           [0, 1, 0, 0],
@@ -11,49 +41,11 @@ export const TETROMINOES = {
         ],
         className: `${className} ${className}__i`,
         type : "I"
-      },
-      {
-        shape: [
-          [0, 0, 0, 0],
-          [1, 1, 1, 1],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0]
-        ],
-        className: `${className} ${className}__i`,
-        type : "I"
-      },
-      {
-        shape: [
-          [0, 0, 1, 0],
-          [0, 0, 1, 0],
-          [0, 0, 1, 0],
-          [0, 0, 1, 0]
-        ],
-        className: `${className} ${className}__i`,
-        type : "I"
-      },
-      {
-        shape: [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [1, 1, 1, 1],
-          [0, 0, 0, 0]
-        ],
-        className: `${className} ${className}__i`,
-        type : "I"
-      },
+      }
+      
   ],
 
   J: [
-    {
-      shape: [
-        [0, 1, 0],
-        [0, 1, 0],
-        [1, 1, 0]
-      ],
-      className: `${className} ${className}__j`,
-      type : "J"
-    },
     {
       shape: [
         [1, 0, 0],
@@ -81,8 +73,26 @@ export const TETROMINOES = {
       className: `${className} ${className}__j`,
       type : "J"
     },
+    {
+      shape: [
+        [0, 1, 0],
+        [0, 1, 0],
+        [1, 1, 0]
+      ],
+      className: `${className} ${className}__j`,
+      type : "J"
+    }
 ],
   L: [
+    {
+      shape: [
+        [0, 0, 1],
+        [1, 1, 1],
+        [0, 0, 0]
+      ],
+      className: `${className} ${className}__l`,
+      type : "L"
+    },
     {
       shape: [
         [0, 1, 0],
@@ -109,16 +119,7 @@ export const TETROMINOES = {
       ],
       className: `${className} ${className}__l`,
       type : "L"
-    },
-    {
-      shape: [
-        [0, 0, 1],
-        [1, 1, 1],
-        [0, 0, 0]
-      ],
-      className: `${className} ${className}__l`,
-      type : "L"
-    },
+    }
   ],
   O: [
     {
@@ -247,24 +248,57 @@ export const TETROMINOES = {
   ]
 };
 
+
 export const randomTetromino = () => {
   const keys = Object.keys(TETROMINOES);
   const index = Math.floor(Math.random() * keys.length);
   const key = keys[index];
-
+  
   return TETROMINOES[key][0];
 }
-// export const rotate = ({ piece, direction}) => {
-//     //transpose rows and columns
-//     const newPiece = piece.map((_, index) => 
-//         piece.map((column) => column[index])
-//     );
 
-//     //reverse rows to get rotated matrix
-//     if (direction > 0) return newPiece.map((row) => row.reverse());
+export const offset = {
+  A: {
+    one: [
+      [0,0],[-1,0],[-1,1],[0,-2],[-1,-2]
+    ],
     
-//     return newPiece.reverse();
-// }
+    two: [
+      [0,0],[1,0],[1,-1],[0,2],[1,2]
+    ],
+
+    three: [
+      [0,0],[1,0],[1,1],[0,-2],[1,-2]
+    ],
+
+    four: [
+      [0,0],[-1,0],[-1,-1],[0,2],[-1,2]
+    ]
+  },
+  
+  I: {
+    one: [
+      [0,0],[-1,0],[-1,1],[0,-2],[-1,-2]
+    ],
+    
+    two: [
+      [0,0],[-1,0],[2,0],[-1,2],[2,-1]
+    ],
+
+    three: [
+      [0,0],[1,0],[1,1],[0,-2],[1,-2]
+    ],
+
+    four: [
+      [0,0],[1,0],[-2,0],[1,-2],[-2,1]
+    ]
+  }
+  
+}
+
+
+
+
 
 export const resetShape = ({player}) => {
   if (player.tetromino.className.includes("__i")) {

@@ -9,7 +9,6 @@ const defaultGrid = {
 const buildHold = (player) => {
     let tetromino;
     let classname;
-    
     if (player) {
         resetShape({player});
         tetromino = player.tetromino.shape;
@@ -17,8 +16,8 @@ const buildHold = (player) => {
         
         return {
             shape: tetromino,
-            className: classname,
-            key: player.count
+            type: player.tetromino.type,
+            className: classname
         };
     }
 

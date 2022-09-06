@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import "./GameController.css";
 
 import { Action, actionForKey, actionIsDrop } from "../buisness/Input";
-import { playerController } from "../buisness/PlayerController";
+import { playerController, nextMove } from "../buisness/PlayerController";
  
 import { useInterval } from "../hooks/useInterval";
 import { useDropTime} from "../hooks/useDropTime";
+import { useLockDelay, useNormalLockDelay } from "../hooks/useLockDelay";
 
 
 const GameController = ({
@@ -19,21 +20,27 @@ const GameController = ({
     swapHold,
     hold
 }) => {
-    const [dropTime, pauseDropTime, resumeDropTime] = useDropTime({
+    const [dropTime, pauseDropTime, resumeDropTime, resetDropTime] = useDropTime({
         gameStats
     });
+    const [lockDelay, setLockDelay] = useLockDelay();
+    const [normalLockDelay, setNormalLockDelay] = useNormalLockDelay();
+    const {collided2} = nextMove({board, player});
+    
+    
+    
+    
 
     useInterval(() => {
-        handleInput(Action.SlowDrop);
+         handleInput(Action.SlowDrop);
     }, dropTime);
+
 
 
     const handleUserKeyPressdown = event => {
         const { key, keyCode } = event;
-
-
+        
         const action = actionForKey(keyCode);
-
         if (action === Action.Quit) {
             setGameOver(true);
             return; 
@@ -46,13 +53,21 @@ const GameController = ({
             return;
         } 
         if (actionIsDrop(action)) pauseDropTime();
-
+        
         handleInput(action);
       };
 
       const handleUserKeyPressup = event => {
         const { key, keyCode } = event;
+        
+        const {collided} = nextMove({board, player});
         const action = actionForKey(keyCode);
+
+        
+        if (!collided && (lockDelay === true)){
+            setLockDelay(false);
+            resetDropTime();
+        }
 
         if (actionIsDrop(action)) resumeDropTime();
 
@@ -83,7 +98,13 @@ const GameController = ({
             setGameOver,
             resetPlayer,
             swapHold,
-            hold
+            hold,
+            setLockDelay,
+            resetDropTime,
+            lockDelay,
+            collided2,
+            setNormalLockDelay,
+            normalLockDelay
         });
     };
 

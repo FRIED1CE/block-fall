@@ -87,21 +87,7 @@ export const nextBoard = ({ board, player, resetPlayer, addLinesCleared, count, 
     }
 
     
-    // if (player.collided){
-    //     if (count === 0){
-    //         setCount(1);
-    //         return {
-    //             rows,
-    //             size: { ...board.size }
-    //         };
-            
-    //     }else if (count === 1) {
-    //         setCount(0)
-    //         resetPlayer();
-    //     }
-    // }else if (player.isFastDropping) {
-    //     resetPlayer();
-    // };
+    
     if (player.collided || player.isFastDropping) {
         resetPlayer();
     }

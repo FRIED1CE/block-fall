@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 
 const defaultDropTime = 1000;
-const minimumDropTime = 100;
+const minimumDropTime = 50;
 const speedIncrement = 50;
 
 export const useDropTime = ({ gameStats }) => {
@@ -29,6 +29,16 @@ export const useDropTime = ({ gameStats }) => {
 
         setDropTime(newDropTime);
     }, [gameStats.level, setDropTime]);
+    const resetDropTime = (time) => {
+        if (time) {
+            setDropTime(time);
+        }
+        if (!time) {
+            const speed = speedIncrement * (gameStats.level -1);
+            const newDropTime = Math.max(defaultDropTime - speed, minimumDropTime);
+            setDropTime(newDropTime);
+        }
+    }
 
-    return [dropTime, pauseDropTime, resumeDropTime];
+    return [dropTime, pauseDropTime, resumeDropTime, resetDropTime];
 }
