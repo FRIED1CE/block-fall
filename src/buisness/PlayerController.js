@@ -1,7 +1,9 @@
+import {useEffect, useState} from "react";
+
 import { Action } from "./Input";
 import { hasCollision, isWithinBoard } from "./Board"; 
 import { TETROMINOES, offset } from "./Tetrominoes";
-import { isCompositeComponent } from "react-dom/test-utils";
+
 
 const attemptRotation = ({ board, player, setPlayer }) => {
     let shape;
@@ -236,7 +238,7 @@ const kick = ({delta, position, shape, board}) => {
     return {collided: preventMove, position: nextPostion};
 }
 
-export const movePlayer = ({ delta, position, shape, board}) => {
+export const movePlayer = ({ delta, position, shape, board, setGameOver}) => {
 
     const desiredNextPosition = {
         row: position.row + delta.row,
@@ -268,7 +270,8 @@ export const movePlayer = ({ delta, position, shape, board}) => {
 
 export const nextMove = ({
     board, 
-    player
+    player,
+    setGameOver
 }) => {
     const delta = {row: 1, column: 0}
     const { collided, nextPostion } = movePlayer({
@@ -315,9 +318,24 @@ const attemptMovement = ({
 
 
     //collided immediately? game over.
-    const isGameOver = collided && player.position.row === 0;
-    if (isGameOver) {
-        setGameOver(false);
+    const isGameOver = collided && player.position.row < 4;
+
+
+    if(isGameOver){
+
+        const shape = player.tetromino.shape
+        const position = player.position
+        for (let y = 0; y < shape.length; y++) {
+            const row = y + position.row;
+    
+            for (let x = 0; x < shape[y].length; x++) {
+                if (shape[y][x]) {
+                    if (row === 0){
+                        setGameOver(true)
+                    }
+                }
+            }
+        }
     }
 
     if (collided) {
@@ -350,7 +368,7 @@ const attemptMovement = ({
 };
 
 
-const attemptHold = ({
+const AttemptHold = ({
     hold,
     swapHold,
     player,
@@ -358,7 +376,7 @@ const attemptHold = ({
 }) => {
     let previousHold;
 
-    if (previousHold === hold.key && previousHold === player.key){
+    if (previousHold === player.key){
         return
     }else {
         previousHold = hold.key;
@@ -408,7 +426,7 @@ export const playerController = ({
             resetPlayer();
 
         } else {
-            attemptHold({
+            AttemptHold({
                 hold,
                 swapHold,
                 player,

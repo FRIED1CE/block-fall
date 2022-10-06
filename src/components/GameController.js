@@ -25,7 +25,7 @@ const GameController = ({
     });
     const [lockDelay, setLockDelay] = useLockDelay();
     const [normalLockDelay, setNormalLockDelay] = useNormalLockDelay();
-    const {collided2} = nextMove({board, player});
+    const {collided2} = nextMove({board, player, setGameOver});
     
     
     
@@ -60,7 +60,7 @@ const GameController = ({
       const handleUserKeyPressup = event => {
         const { key, keyCode } = event;
         
-        const {collided} = nextMove({board, player});
+        const {collided} = nextMove({board, player, setGameOver});
         const action = actionForKey(keyCode);
 
         

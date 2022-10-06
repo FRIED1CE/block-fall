@@ -2,12 +2,12 @@ import "./Hold.css";
 
 import React from "react";
 
+
 import { buildBoard } from "../buisness/Board";
 import { transferToBoard } from "../buisness/Tetrominoes";
 
 import BoardCell from "./BoardCell";
 
-import  { useHold } from "../hooks/useHold";
 
 const Hold = ({ hold }) => {
     

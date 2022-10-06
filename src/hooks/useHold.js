@@ -17,7 +17,8 @@ const buildHold = (player) => {
         return {
             shape: tetromino,
             type: player.tetromino.type,
-            className: classname
+            className: classname,
+            key: player.key
         };
     }
 
@@ -27,7 +28,7 @@ const buildHold = (player) => {
        
        return {
         shape: tetromino,
-        className: classname,
+        className: classname
         };
     };
 

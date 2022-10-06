@@ -23,6 +23,7 @@ const Tetris = ({rows, columns, setGameOver}) => {
          player,
          resetPlayer,
          addLinesCleared,
+         setGameOver
     });
 
     const { hold, setHold, swapHold } = useHold();

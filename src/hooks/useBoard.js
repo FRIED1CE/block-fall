@@ -10,6 +10,7 @@ export const useBoard = ({
     player, 
     resetPlayer, 
     addLinesCleared,
+    setGameOver
 }) => {
     const [board, setBoard] = useState(buildBoard({ rows, columns }));
 
@@ -21,9 +22,10 @@ export const useBoard = ({
                 player,
                 resetPlayer,
                 addLinesCleared,
+                setGameOver
             })
         );
-    }, [player, resetPlayer, addLinesCleared]);
+    }, [player, resetPlayer, addLinesCleared, setGameOver]);
 
     return [board];
 }

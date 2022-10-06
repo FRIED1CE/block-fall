@@ -31,7 +31,7 @@ const findDropPosistion = ({ board, position, shape }) => {
     return { ...position, row };
 }
 
-export const nextBoard = ({ board, player, resetPlayer, addLinesCleared, count, setCount }) => {
+export const nextBoard = ({ board, player, resetPlayer, addLinesCleared, count, setCount, setGameOver }) => {
     const { tetromino, position } = player;
     
     //copy and clear spaces used by pieces that
@@ -85,11 +85,33 @@ export const nextBoard = ({ board, player, resetPlayer, addLinesCleared, count, 
     if (linesCleared > 0) {
         addLinesCleared(linesCleared);
     }
-
-    
-    
+    let isGameOver = false
     if (player.collided || player.isFastDropping) {
-        resetPlayer();
+        const shape = player.tetromino.shape
+        const position = dropPostition
+        
+        for (let y = 0; y < shape.length; y++) {
+            const row = y + position.row;
+            
+            for (let x = 0; x < shape[y].length; x++) {
+                if (shape[y][x]) {
+                    const column = x + position.column;
+                    
+                    if (
+                        board.rows[row] &&
+                        board.rows[row][column] &&
+                        row === 1
+                    ) {
+                        isGameOver = true;
+                    }
+                }
+            }
+        }
+        if (isGameOver){
+            setGameOver(true)
+        }else if(!isGameOver){
+            resetPlayer()
+        }
     }
     
 
@@ -107,7 +129,6 @@ export const hasCollision = ({ board, position, shape }) => {
         for (let x = 0; x < shape[y].length; x++) {
             if (shape[y][x]) {
                 const column = x + position.column;
-                
                 if (
                     board.rows[row] &&
                     board.rows[row][column] &&
@@ -132,9 +153,13 @@ export const isWithinBoard = ({ board, position, shape }) => {
                 const column = x + position.column;
                 const isValidPosition = board.rows[row] && board.rows[row][column];
 
-                if (!isValidPosition) return false;
+                if (!isValidPosition ) return false;
+
+
             }
         }
     }
     return true;
 }
+
+
