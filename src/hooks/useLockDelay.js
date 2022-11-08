@@ -11,3 +11,9 @@ export const useNormalLockDelay = () => {
 
     return [ normalLockDelay, setNormalLockDelay ];
 }
+
+export const useLockCount = () => {
+    const [ lockCount, setLockCount ] = useState(0)
+
+    return [ lockCount, setLockCount ];
+}

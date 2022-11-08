@@ -7,7 +7,7 @@ import { playerController, nextMove } from "../buisness/PlayerController";
  
 import { useInterval } from "../hooks/useInterval";
 import { useDropTime} from "../hooks/useDropTime";
-import { useLockDelay, useNormalLockDelay } from "../hooks/useLockDelay";
+import { useLockDelay, useNormalLockDelay, useLockCount } from "../hooks/useLockDelay";
 
 
 const GameController = ({
@@ -25,6 +25,7 @@ const GameController = ({
     });
     const [lockDelay, setLockDelay] = useLockDelay();
     const [normalLockDelay, setNormalLockDelay] = useNormalLockDelay();
+    const [ lockCount, setLockCount ] = useLockCount();
     const {collided2} = nextMove({board, player, setGameOver});
     
     
@@ -104,7 +105,9 @@ const GameController = ({
             lockDelay,
             collided2,
             setNormalLockDelay,
-            normalLockDelay
+            normalLockDelay,
+            lockCount,
+            setLockCount
         });
     };
 
