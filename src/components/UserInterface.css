@@ -1,0 +1,24 @@
+
+.UserInterface-Bottom{
+    display: grid;
+    row-gap: 5vh;
+    margin: auto;
+    width: 60%;
+    padding-top: 5vh;
+
+}
+
+.UserInterface-Bottom > :link > div{
+    background-color: white;
+    color: red;
+    height: 10vh;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+:link{
+    text-decoration: none;
+}
