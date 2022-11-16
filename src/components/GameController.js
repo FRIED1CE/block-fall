@@ -6,7 +6,6 @@ import { Action, actionForKey, actionIsDrop } from "../buisness/Input";
 import { playerController, nextMove } from "../buisness/PlayerController";
  
 import { useInterval } from "../hooks/useInterval";
-import { useDropTime} from "../hooks/useDropTime";
 import { useLockDelay, useNormalLockDelay, useLockCount } from "../hooks/useLockDelay";
 
 
@@ -18,19 +17,18 @@ const GameController = ({
     setPlayer,
     resetPlayer,
     swapHold,
-    hold
+    hold,
+    setPause,
+    pause,
+    dropTime,
+    pauseDropTime,
+    resumeDropTime,
+    resetDropTime
 }) => {
-    const [dropTime, pauseDropTime, resumeDropTime, resetDropTime] = useDropTime({
-        gameStats
-    });
     const [lockDelay, setLockDelay] = useLockDelay();
     const [normalLockDelay, setNormalLockDelay] = useNormalLockDelay();
     const [ lockCount, setLockCount ] = useLockCount();
     const {collided2} = nextMove({board, player, setGameOver});
-    
-    
-    
-    
 
     useInterval(() => {
          handleInput(Action.SlowDrop);
@@ -42,18 +40,27 @@ const GameController = ({
         const { key, keyCode } = event;
         
         const action = actionForKey(keyCode);
+
+        if (pause === true && action !== Action.Pause){
+            return;
+        }
         if (action === Action.Quit) {
             setGameOver(true);
             return; 
         } else if (action === Action.Pause) {
             if (dropTime) {
-                pauseDropTime(); 
+                pauseDropTime();
+                setPause(true);
+                
             } else{
+                setPause(false)
                 resumeDropTime();
+
             }
             return;
         } 
-        if (actionIsDrop(action)) pauseDropTime();
+        
+        if ((actionIsDrop(action)) && pause !== true) pauseDropTime();
         
         handleInput(action);
       };
@@ -70,7 +77,10 @@ const GameController = ({
             resetDropTime();
         }
 
-        if (actionIsDrop(action)) resumeDropTime();
+        if ((actionIsDrop(action)) && pause !== true){
+
+            resumeDropTime();
+        }   
 
       };
 
@@ -90,6 +100,7 @@ const GameController = ({
     })
     
 
+ 
     const handleInput = (action) => {
         playerController({
             action,

@@ -337,7 +337,6 @@ const attemptMovement = ({
             }
         }
     }
-    // console.log(collided2, " : " , collided)
     if (collided) {
         setLockDelay(false);
         setNormalLockDelay(false);

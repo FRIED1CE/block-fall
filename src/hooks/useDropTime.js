@@ -8,6 +8,7 @@ export const useDropTime = ({ gameStats }) => {
     const [dropTime, setDropTime] = useState(defaultDropTime);
     const [previousDropTime, setPreviousDropTime] = useState();
     
+
     const resumeDropTime = useCallback(() => {
         if (!previousDropTime) {
             return
