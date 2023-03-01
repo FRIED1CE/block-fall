@@ -1,0 +1,9 @@
+.Timer{
+    color: white;
+}
+
+.timer-value {
+    font-size: 1.5rem;
+    margin-bottom: 0.5em;
+    color: black(255, 255, 255, 1);
+}

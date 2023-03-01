@@ -2,19 +2,25 @@ import "./UserInterface.css"
 
 import { Link } from "react-router-dom";
 
-const SinglePlayer = () => {
+
+
+import logo from "./images/blockfallLogo.png";
+import Navbar from "./Navbar";
+import LoginForm from "./loginFrom";
+
+
+const SinglePlayer = ({isShowLogin, handleLoginClick, username}) => {
+    
     return(
-        <div className="UserInterface">
-            <div className="UserInterface-Top">
-                <div className="BackButton">Back</div>
-                <h1 className="Title">BlockFall</h1>
-            </div>   
-            <div className="UserInterface-Bottom">
+        <div className="UserInterface MainMenu">
+            <Navbar handleLoginClick={handleLoginClick} username={username}/>
+            <LoginForm isShowLogin={isShowLogin} handleLoginClick={handleLoginClick} />
+            <img src={logo} className="logo" alt="error" />
+            <div className="UserInterface-Bottom fade">
                 <Link to="/SinglePlayer/Marathon"><div>Marathon</div></Link>
                 <Link to="/SinglePlayer/2Minute"><div>2 Minute</div></Link>
-                <Link to="/SinglePlayer/40Row"><div>40 row</div></Link>
+                <Link to="/SinglePlayer/40Lines"><div>40 Lines</div></Link>
                 <Link to="/SinglePlayer/Master"><div>Master</div></Link>
-                <Link to="/SinglePlayer/Custom"><div>Custom</div></Link>
             </div>
         </div>
     )

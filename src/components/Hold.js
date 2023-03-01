@@ -16,7 +16,8 @@ const Hold = ({ hold }) => {
     const board = buildBoard({ rows: 4, columns: 4 });
 
 
-
+    // adds the tetrominoes to the render if there is shape
+    // else an empty board is returned.
     board.rows = transferToBoard({
         className,
         IsOccupied: false,
@@ -27,6 +28,7 @@ const Hold = ({ hold }) => {
 
     return (
         <div className="Hold" >
+            <div className="hold-title">HOLD</div>
             <div className="Hold-board">
                 {board.rows.map((row,y) => 
                     row.map((cell,x) => (

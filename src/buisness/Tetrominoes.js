@@ -1,5 +1,8 @@
 const className = "tetromino";
 
+
+// each tetromino has 4 rotations, with a classname and type for each
+// "o" tetromino have no rotations
 export const TETROMINOES = {
   I: [
     {
@@ -250,8 +253,11 @@ export const TETROMINOES = {
 
 
 export const randomTetromino = () => {
+  // gets each type of Tetrominoes
   const keys = Object.keys(TETROMINOES);
+  // creates a random number
   const index = Math.floor(Math.random() * keys.length);
+  // selected a key based on the number
   const key = keys[index];
   
   return TETROMINOES[key][0];
@@ -259,37 +265,37 @@ export const randomTetromino = () => {
 
 export const offset = {
   A: {
-    one: [
+    0: [
       [0,0],[-1,0],[-1,1],[0,-2],[-1,-2]
     ],
     
-    two: [
+    1: [
       [0,0],[1,0],[1,-1],[0,2],[1,2]
     ],
 
-    three: [
+    2: [
       [0,0],[1,0],[1,1],[0,-2],[1,-2]
     ],
 
-    four: [
+    3: [
       [0,0],[-1,0],[-1,-1],[0,2],[-1,2]
     ]
   },
   
   I: {
-    one: [
+    0: [
       [0,0],[-1,0],[-1,1],[0,-2],[-1,-2]
     ],
     
-    two: [
+    1: [
       [0,0],[-1,0],[2,0],[-1,2],[2,-1]
     ],
 
-    three: [
+    2: [
       [0,0],[1,0],[1,1],[0,-2],[1,-2]
     ],
 
-    four: [
+    3: [
       [0,0],[1,0],[-2,0],[1,-2],[-2,1]
     ]
   }
@@ -325,8 +331,11 @@ export const transferToBoard = ({
     rows,
     shape
 }) => {
+  //iterates through each cell of the shape 
   shape.forEach((row,y) => {
         row.forEach((cell, x) => {
+          // if it is filled, marks the corresponding cell on 
+          // the board as occupied with the shape's className
             if (cell) {
                 const occupied = isOccupied;
                 const _y = y + position.row;

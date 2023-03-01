@@ -1,11 +1,14 @@
 import "./Tetris.css";
 
+import { useEffect, useState } from "react";
+
 import Board from "./Board";
 import GameStats from "./GameStats";
 import Previews from "./Previews";
 import Hold from "./Hold";
 import GameController from "./GameController";
 import PauseMenu from "./PauseMenu";
+import Timer from "./Timer";
 
 import { useBoard } from "../hooks/useBoard";
 import { useGameStats} from "../hooks/useGameStats";
@@ -15,11 +18,9 @@ import { usePause } from "../hooks/usePause";
 import { useDropTime } from "../hooks/useDropTime";
 
 
-const Tetris = ({rows, columns, setGameOver}) => {
-
+const Tetris = ({rows, columns, setGameOver, startLevel, rowLimit, maxTime, gameStats, addLinesCleared, time, setTime, highScore, controls, changeControls, resetControls, isSettings, setIsSettings }) => {
 
     const [pause, setPause, resetPause ] = usePause();
-    const [gameStats, addLinesCleared] = useGameStats();
     const [player, setPlayer, resetPlayer] = usePlayer();
     const [board, setBoard] = useBoard({
          rows, 
@@ -27,18 +28,28 @@ const Tetris = ({rows, columns, setGameOver}) => {
          player,
          resetPlayer,
          addLinesCleared,
-         setGameOver
+         setGameOver,
+         rowLimit,
+         gameStats
     });
+
     const [dropTime, pauseDropTime, resumeDropTime, resetDropTime] = useDropTime({
         gameStats
     });
 
-    const { hold, setHold, swapHold } = useHold();
+
+    const { hold, swapHold } = useHold();
+    
+    const [ gameTime, setGameTime ] = useState(1);
+
+    useEffect(() => {
+        if (!pause) setIsSettings(false);
+    },[pause])
 
     return (
         <div className="Tetris">
             <Board board={board}/>
-            <GameStats gameStats={gameStats} />
+            <GameStats gameStats={gameStats} rowLimit={rowLimit} pause={pause} setGameOver={setGameOver} maxTime={maxTime} time={time} setTime={setTime} highScore={highScore} />
             <Previews tetrominoes={player.tetrominoes} />
             <Hold 
                 hold={hold}
@@ -58,15 +69,14 @@ const Tetris = ({rows, columns, setGameOver}) => {
                 dropTime={dropTime} 
                 resumeDropTime={resumeDropTime} 
                 resetDropTime={resetDropTime}
-
+                rowLimit={rowLimit}
+                gameTime={gameTime} 
+                setGameTime={setGameTime}
+                controls={controls}
 
             />
             {pause ? (
-               <PauseMenu 
-               setGameOver={setGameOver} 
-               setPause={setPause}
-               resumeDropTime={resumeDropTime} 
-               />
+               <PauseMenu setGameOver={setGameOver} setPause={setPause} resumeDropTime={resumeDropTime} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} pause={pause} />
            ) : (
             <></>
            )} 

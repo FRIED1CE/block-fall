@@ -1,10 +1,7 @@
 .Preview {
-    position: absolute;
-    top: 0;
-    left: 63vw;
-    background: rgba(0, 0, 0, 0.1);
     border: 5px solid rgba(0, 0, 0, 0);
     border-radius: 10px;
+    margin-left: 10px;
   }
   
   .Preview-board {
@@ -15,4 +12,20 @@
     width: 5vw;
     height: 5vw;
   }
-  
+  .preview-container{
+    position: absolute;
+    top: 0;
+    left: 60.4vw;
+    background: rgb(32, 0, 64);
+    width: 7.5vw;
+    border: 2px solid white;
+    border-left: 0;
+    align-items: center;
+    border-bottom-right-radius: 10px;
+  }
+  .preview-title{
+    color: black;
+    background-color: white;
+    text-align: left;
+    margin-bottom: 4px;
+  }

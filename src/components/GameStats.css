@@ -2,23 +2,24 @@
   position: absolute;
   width: 22vw;
   list-style-type: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: white(255, 255, 255, 0.5);
+  font-weight: bold;
 }
 
 .GameStats__left {
-  right: 0;
-  top: 22vh;
+  left: 61vw;
+  bottom: 13vh;
   text-align: left;
 }
 
 .GameStats__right {
-  right: 47vw;
+  right: 61.5vw;
   bottom: 0;
-  text-align: left;
+  text-align: right;
 }
 
 .GameStats .value {
   font-size: 1.5rem;
   margin-bottom: 0.5em;
-  color: rgba(255, 255, 255, 1);
+  color: black(255, 255, 255, 1);
 }

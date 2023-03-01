@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./GameController.css";
 
-import { Action, actionForKey, actionIsDrop } from "../buisness/Input";
 import { playerController, nextMove } from "../buisness/PlayerController";
  
 import { useInterval } from "../hooks/useInterval";
@@ -23,31 +22,69 @@ const GameController = ({
     dropTime,
     pauseDropTime,
     resumeDropTime,
-    resetDropTime
+    resetDropTime,
+    master,
+    rowLimit,
+    time, 
+    gameTime, 
+    setGameTime,
+    controls
 }) => {
     const [lockDelay, setLockDelay] = useLockDelay();
     const [normalLockDelay, setNormalLockDelay] = useNormalLockDelay();
     const [ lockCount, setLockCount ] = useLockCount();
     const {collided2} = nextMove({board, player, setGameOver});
 
+    const [previousHold, setPreviousHold] = useState(null);
+
     useInterval(() => {
-         handleInput(Action.SlowDrop);
+         handleInput(controls["slowDrop"]);
     }, dropTime);
 
-
+    useEffect(() => {
+        if (gameStats.linesCompleted >= rowLimit)setGameOver(true);
+    },[gameStats.linesCompleted])
 
     const handleUserKeyPressdown = event => {
-        const { key, keyCode } = event;
-        
-        const action = actionForKey(keyCode);
-
-        if (pause === true && action !== Action.Pause){
+        const { key } = event;
+        if (pause === true && key !== controls["pause"]){
             return;
         }
-        if (action === Action.Quit) {
-            setGameOver(true);
+        if (key === controls["rotateLeft"] || key === controls["rotateRight"] || key === controls["pause"]) {
             return; 
-        } else if (action === Action.Pause) {
+        } else if (key === controls["quit"]) {
+            setGameOver(true);
+            return;
+        }
+        
+        if (key === controls["fastDrop"] || key === controls["slowDrop"]) {
+            pauseDropTime()
+            handleInput(key)
+        } else {
+            handleInput(key)
+        }
+        
+      };
+
+      const handleUserKeyPressup = event => {
+        const { key } = event;
+        
+        const { collided } = nextMove({board, player, setGameOver});
+
+        if (pause === true && key !== controls["pause"]){
+            return;
+        }
+        
+        if (!collided && (lockDelay === true)){
+            setLockDelay(false);
+            resetDropTime();
+        }
+
+        if (key === controls["fastDrop"] || key === controls["slowDrop"]){
+            resumeDropTime();
+        } else if (key === controls["rotateLeft"] || key === controls["rotateRight"]){
+            handleInput(key)
+        } else if (key === controls["pause"]) {
             if (dropTime) {
                 pauseDropTime();
                 setPause(true);
@@ -59,31 +96,10 @@ const GameController = ({
             }
             return;
         } 
-        
-        if ((actionIsDrop(action)) && pause !== true) pauseDropTime();
-        
-        handleInput(action);
-      };
-
-      const handleUserKeyPressup = event => {
-        const { key, keyCode } = event;
-        
-        const {collided} = nextMove({board, player, setGameOver});
-        const action = actionForKey(keyCode);
-
-        
-        if (!collided && (lockDelay === true)){
-            setLockDelay(false);
-            resetDropTime();
-        }
-
-        if ((actionIsDrop(action)) && pause !== true){
-
-            resumeDropTime();
-        }   
 
       };
 
+    // listening for key press
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPressdown)
 
@@ -98,12 +114,17 @@ const GameController = ({
             window.removeEventListener('keyup', handleUserKeyPressup);
           };
     })
+     
+        
+      
+
+    
     
 
  
-    const handleInput = (action) => {
+    const handleInput = (key) => {
         playerController({
-            action,
+            key,
             board,
             player,
             setPlayer,
@@ -118,7 +139,11 @@ const GameController = ({
             setNormalLockDelay,
             normalLockDelay,
             lockCount,
-            setLockCount
+            setLockCount,
+            previousHold,
+            setPreviousHold,
+            controls
+            
         });
     };
 

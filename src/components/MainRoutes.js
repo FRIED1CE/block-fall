@@ -1,27 +1,46 @@
 import { Route, Routes } from "react-router-dom"; 
+import { useState, useEffect } from "react";
+
+import { useGameOver } from "../hooks/useGameOver";
+import { useControls } from "../hooks/useControls";
 
 import HomePage from "./HomePage";
 import SinglePlayer from "./SinglePlayer";
-import Multiplayer from "./Multiplayer";
-import Campaign from "./Campaign";
+import Marathon from "./Marathon";
 import LeaderBoard from "./LeaderBoard";
-import Game from "./Game";
+import FortyLines from "./ForyLines";
+import TwoMinute from "./TwoMinute";
+import Master from "./Master";
 
-const MainRoutes = () => {    
+
+const MainRoutes = ({ username }) => {    
+
+    const [isMenu, setIsMenu] = useState(false);
+    const [isSettings, setIsSettings] = useState(false)
+    const [isShowLogin, setIsShowLogin] = useState(true);
+    const [gameOver, setGameOver, resetGameOver] = useGameOver()
+    const [controls, changeControls, resetControls] = useControls();
+
+    const handleLoginClick = () => {
+        setIsShowLogin((isShowLogin) => !isShowLogin);
+    };
+
+
+    const start = () => { 
+        resetGameOver() 
+    };
+
     return(
     <Routes>
-        <Route path="/" element={<HomePage />}/>
+        <Route path="/" element={<HomePage isMenu={isMenu} setIsMenu={setIsMenu} isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} gameOver={gameOver}/>}/>
         <Route path="/SinglePlayer">
-            <Route index element={<SinglePlayer/>}/>
-            <Route path="Marathon" element={<Game rows={22} columns={10} />} />
-            <Route path="2Minute" element={<Game rows={22} columns={10} />} />
-            <Route path="40Row" element={<Game rows={22} columns={10} />} />
-            <Route path="Master" element={<Game rows={22} columns={10} />} />
-            <Route path="Custom" element={<Game rows={22} columns={10} />} />
+            <Route index element={<SinglePlayer isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} />}/>
+            <Route path="Marathon" element={<Marathon isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
+            <Route path="2Minute" element={<TwoMinute isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} maxTime={120} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
+            <Route path="40Lines" element={<FortyLines isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} rowLimit={40} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
+            <Route path="Master" element={<Master isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} startLevel={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
         </Route>
-        <Route path="/Multiplayer" element={<Multiplayer />}/>
-        <Route path="/Campaign" element={<Campaign />}/>
-        <Route path="/LeaderBoard" element={<LeaderBoard />}/>
+        <Route path="/LeaderBoard" element={<LeaderBoard isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username}/>}/>
     </Routes>
     )
 }

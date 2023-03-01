@@ -1,24 +1,45 @@
-
 .UserInterface-Bottom{
+    justify-content: right;
     display: grid;
-    row-gap: 5vh;
+    row-gap: 2vh;
     margin: auto;
-    width: 60%;
-    padding-top: 5vh;
+    padding-right: 10vh;
+    padding-top: 20vh;
+    align-self: flex-end;
 
 }
 
 .UserInterface-Bottom > :link > div{
-    background-color: white;
-    color: red;
+    background-color: black;
+    border: 3px solid white;
+    color: white;
     height: 10vh;
-    border-radius: 50px;
+    width: 40vh;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-
 }
+.UserInterface-Bottom > :link > div:hover{
+    transform: scale(1.1) perspective(1px);
+}
+
+.UserInterface-Bottom > div{
+  background-color: black;
+  border: 3px solid white;
+  color: white;
+  height: 10vh;
+  width: 40vh;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.UserInterface-Bottom > div:hover{
+  transform: scale(1.1) perspective(1px);
+  cursor: pointer;
+}
+
 :link{
     text-decoration: none;
 }
@@ -57,4 +78,502 @@
 }
 .pause-bottom > button:hover{
     transform: scale(1.1) perspective(1px)
+}
+
+.logo {
+    width: 70vh;
+    height: 70vh;
+}
+.logo-small {
+    width: 70vh;
+    height: 70vh;
+}
+
+.pulsate {
+    font-family: fantasy;
+    font-size: 5vh;
+    animation: pulsate 3s ease-out;
+    animation-iteration-count: infinite; 
+    opacity: 0.5;
+}
+@keyframes pulsate {
+    0% { 
+        opacity: 0.5;
+    }
+    50% { 
+        opacity: 1.0;
+    }
+    100% { 
+        opacity: 0.5;
+    }
+}
+
+.MainMenu {
+    padding-left: 40vh;
+    padding-top: 5vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.back{
+    position: absolute;
+    left: 3vh;
+    top: 2vh;
+    border: 3px solid white;
+    color: white;
+    font-size: 3vh;
+    height: 7vh;
+    width: 14vh;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.back:hover{
+    cursor: pointer;
+    transform: scale(1.1) perspective(1px)
+}
+
+.fade {
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .navbar {
+    position: absolute;
+    background-color: #24252a;
+    width: 100%;
+    height: 60px;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+  }
+
+  .loginicon {
+    position: absolute;
+    width: 80px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    color: black;
+    height: 40px;
+    left: 85%;
+    top: 10px;
+    background: #2bc6ff;
+    border-radius: 24px;
+    cursor: pointer;
+  }
+  
+  .loginicon:hover {
+    color: black;
+  }
+  
+  .login-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .form-box {
+    margin-top: 7vh;
+    background: white;
+    padding-right: 80px;
+    padding-left: 80px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px 1px rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+    z-index: 1;
+  }
+  
+  .login-text {
+    width: 100%;
+    color: black;
+    border-bottom: 2px solid black;
+    line-height: 30px;
+    width: 100%;
+    font-weight: bolder;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    margin-bottom: 2vh;
+  }
+  
+  label {
+    color: black;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .login-box {
+    border: 1px solid lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 2px;
+    padding-left: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin: 5px;
+    font-size: 11pt;
+    background: transparent;
+    transition: 1s;
+    outline: none;
+    width: 95%;
+  }
+  
+  .login-btn {
+    width: 75%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(48, 172, 251);
+    color: black;
+    margin-top: 5px;
+    border-radius: 20px;
+    border: none;
+    font-size: 15pt;
+    font-weight: 700;
+    transition: 1s;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .login-btn:hover {
+    transform: scale(1.03);
+    letter-spacing: 4px;
+    background-color: #7fffd4;
+    color: #1e90ff;
+  }
+  
+  .show {
+    display: block;
+    position: absolute;
+    bottom: 10vh;
+    left: 50vh;
+    transition: 800ms;
+    opacity: 1;
+  }
+  
+  .show.active {
+    transform: translateY(100px) scale(0) rotateY(180deg);
+    opacity: 0;
+  }
+
+  .register-login {
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .bold {
+    color: blue;
+  }
+  .bold:hover {
+    cursor: pointer;
+  }
+  .Username{
+    float: right;
+    font-weight: bold;
+    font-size: 4vh;
+    position: absolute;
+    left: 85%;
+    top: 15px;
+    padding: 0.2em;
+    cursor: pointer;
+  }
+
+  .Page-name {
+    font-weight: bold;
+    font-size: 4vh;
+    padding-top: 15px;;
+  }
+  .first.Gamemode{
+    margin-top: 15vh;
+  }
+  .Gamemode.menu{
+    padding-bottom: 2vh;
+  }
+  .Gamemode{
+    background-color: #24252a;
+    padding: 2vh;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border: 3px solid white;
+    color: white;
+    border-radius: 10px;
+   text-align: left;
+  }
+  .Leaderboard{
+    position: absolute;
+    right: 2vh;
+    top: 2vh;
+    color: white;
+    background-color: #202125;
+    box-shadow: 2px 2px #191a1d;
+    padding: 2px
+  }
+
+  .start-btn:hover {
+    transform: scale(1.03);
+    letter-spacing: 4px;
+    background-color: #7fffd4;
+    color: #1e90ff;
+  }
+  .start-btn {
+    border: 3px solid white;
+    padding: 2vh;
+    font-size: 2em;
+    position: absolute;
+    top: 50vh;
+    left: 83vh;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    background-color: #202125;
+    color: white;
+    margin-top: 5px;
+    border-radius: 20px;
+    font-weight: 700;
+    transition: 1s;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .points {
+    background-color: #1a1b1e;
+    text-align: center;
+    font-size: 6vh;
+    font-weight: 900;
+    text-shadow: 0 0.03em #909dc3, 0 0 16px #fff4;
+    padding-top: 0.2em;
+  }
+  .leaderboard-btn-container{
+    display: flex;
+    justify-content:space-around;
+    padding-bottom: 0.5em;
+  }
+  .leaderboard-btn:last-child{
+    margin-right: 0
+  }
+  .leaderboard-btn{
+    color: white;
+    background-color: #202125;
+    box-shadow: 2px 2px #191a1d;
+    padding: 0.2em;
+    font-size: 1.5em;
+    width: 100%;
+    margin-right: 0.2em;
+    margin-top: 0.5em;
+    cursor: pointer;
+    text-align: center;
+  }
+  .leaderboard-btn.active{
+    background-color: #2f3035;
+    box-shadow: 2px 2px #2d2f33;
+  }
+  .leaderboard-entry:first-child{
+    margin-top: 10vh;
+  }
+  .leaderboard-entry{
+    background-color: #24252a;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border: 3px solid white;
+    color: white;
+    display: flex;
+    margin-top: 4vh;
+  }
+  .leaderboard-num {
+    font-family: HUN;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.5em;
+    justify-content: right;
+    width: 20%;
+    background-color: #2f3035;
+    padding-right: 1vh;
+  }
+  .leaderboard-num::before {
+    content: "No";
+    font-size: 1em;
+    opacity: .5;
+    vertical-align: top;
+  }
+  .leaderboard-num > h1 {
+    margin-left: 10px;
+    text-shadow: 0 0.04em #fff4, 0 0 8px #fff8;
+  }
+
+  .leaderboard-name {
+    text-align: left;
+    padding-left: 10px;
+    width: 60%;
+  }
+  .leaderboard-name > p {
+    opacity: .5;
+  }
+  .leaderboard-score{
+    padding-left: 10px;
+    padding: 3vh;
+    display: flex;
+    align-items: center;
+  }
+  .leaderboard-score > h1{
+    margin-right: 4px;
+  }
+  .leaderboard-score::after{
+    content: "pts";
+    font-size: 1.2em;
+    opacity: .5;
+  }
+  .leaderboard-score2{
+    padding-left: 10px;
+    padding: 3vh;
+    display: flex;
+    align-items: center;
+  }
+  .leaderboard-score2 > h1{
+    margin-right: 4px;
+  }
+  .scroll{
+    overflow: auto;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+  }
+  .settings {
+    background-color: rgba(195, 206, 218, 0.5);
+    color: black;
+    border-radius: 2.5vh;
+    height: 70vh;
+    width: 40vh;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 3em;
+    text-align: center;
+  }
+  
+  .settings.active {
+    transform: translateY(100px) scale(0) rotateY(180deg);
+    opacity: 0;
+  }
+  .controls{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em 0 1em;
+  }
+  .controls > button {
+    width: 50%;
+    text-align: center;
+  }
+  .controls > button:hover {
+    transform: scale(1.1) perspective(1px)
+}
+.controls.clicked > button {
+  transform: scale(1.1) perspective(1px);
+  background-color: #7fffd4;
+  color: #1e90ff;
+}
+  
+.reset{
+  text-align: center;
+  width: 60%;
+  background-color: white;
+  margin-left: 20%;
+}
+.reset:hover {
+  transform: scale(1.1) perspective(1px);
+  cursor: pointer;
+}
+
+.backArrow {
+  position: absolute;
+  top: .2em;
+  left: .4em;
+  width: 6vh;
+  height: 6vh;
+}
+.backArrow:hover{
+  cursor: pointer;
+  transform: scale(1.1) perspective(1px);
+}
+
+.dropdown-menu{
+  position: absolute;
+  top: 60px;
+  right: 50px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 0 0 20px;
+  width: 200px;
+}
+.dropdown-menu::before{
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 20px;
+  height: 20px;
+  width: 20px;
+  transform: rotate(45deg);
+  background-color: white;
+}
+.dropdown-menu ul li:hover {
+  cursor: pointer;
+}
+.dropdown-item {
+  display: flex;
+  margin: 10px auto;
+}
+.dropdown-item img{
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+}
+.dropdown-item p {
+  max-width: 100px;
+  margin-left: 10px;
+  color: black;
+}
+.dropdown-menu.active{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: ease;
+}
+.dropdown-menu.inactive{
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: ease;
+}
+.logout {
+  transform: rotate(180deg);
 }

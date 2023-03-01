@@ -1,236 +1,94 @@
-import {useEffect, useState} from "react";
-
-import { Action } from "./Input";
 import { hasCollision, isWithinBoard } from "./Board"; 
 import { TETROMINOES, offset } from "./Tetrominoes";
 
 
-const attemptRotation = ({ board, player, setPlayer }) => {
+const attemptRotation = ({ board, player, setPlayer, direction }) => {
     let shape;
     let rotation;
-    if (player.tetromino.type === "O"){
-        return;
+    if (player.tetromino.type === "O") return;
+
+    if (direction === 1) {
+        player.rotation + 1 === 4
+        ? (rotation = 0)
+        : (rotation = player.rotation + 1);
+    } else if (direction === -1) {
+        player.rotation - 1 === -1
+        ? (rotation = 3)
+        : (rotation = player.rotation - 1);
     }
     if (player.tetromino.type === "I") {
-        if (player.rotation === 0){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][1].shape;
-                const delta = {row: offset.I.one[x][1], column: offset.I.one[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position: player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) { 
-                    rotation = player.rotation + 1; 
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
+        for (let x = 0; x < 5; x++) {
+            shape = TETROMINOES["I"][rotation].shape;
+            const delta = {
+                row: offset.I[rotation][x][1], 
+                column: offset.I[rotation][x][0]
+            };
+            const {collided, position} = kick({
+                delta, 
+                position: player.position, 
+                shape, 
+                board
+            })
+            if (!collided) { 
+                setPlayer({
+                    ...player,
+                    rotation,
+                    position,
+                    tetromino: {
+                        ...player.tetromino,
+                        shape
+                    }
+                });
+                return;
             }
-        }else if (player.rotation === 1){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][2].shape;
-                const delta = {row: offset.I.two[x][1], column: offset.I.two[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position:player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) {  
-                    rotation = player.rotation + 1;
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
-            }
-        }else if (player.rotation === 2){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][3].shape;
-                const delta = {row: offset.I.three[x][1], column: offset.I.three[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position:player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) {  
-                    rotation = player.rotation + 1;
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
-            }
-        }else if (player.rotation === 3){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][0].shape;
-                const delta = {row: offset.I.four[x][1], column: offset.I.four[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position: player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) {  
-                    rotation = 0;
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
+        }
+    } else {
+        for (let x = 0; x < 5; x++) {
+            shape = TETROMINOES[player.tetromino.type][rotation].shape;
+            const delta = {
+                row: offset.A[rotation][x][1], 
+                column: offset.A[rotation][x][0]
+            };
+            const {collided, position} = kick({
+                delta, 
+                position: player.position, 
+                shape, 
+                board
+            })
+            if (!collided) {
+                setPlayer({
+                    ...player,
+                    rotation,
+                    position,
+                    tetromino: {
+                        ...player.tetromino,
+                        shape
+                    }
+                });
+                return;
                 }
             }
         }
-    }else {
-        if (player.rotation === 0){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][1].shape;
-                const delta = {row: offset.A.one[x][1], column: offset.A.one[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position:player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) { 
-                    rotation = player.rotation + 1; 
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
-            }
-        }else if (player.rotation === 1){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][2].shape;
-                const delta = {row: offset.A.two[x][1], column: offset.A.two[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position:player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) {  
-                    rotation = player.rotation + 1;
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
-            }
-        }else if (player.rotation === 2){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][3].shape;
-                const delta = {row: offset.A.three[x][1], column: offset.A.three[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position:player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) {  
-                    rotation = player.rotation + 1;
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
-            }
-        }else if (player.rotation === 3){
-            for (let x = 0; x < 5; x++) {
-                shape = TETROMINOES[player.tetromino.type][0].shape;
-                const delta = {row: offset.A.four[x][1], column: offset.A.four[x][0]};
-                const {collided, position} = kick({
-                    delta, 
-                    position: player.position, 
-                    shape, 
-                    board
-                })
-                if (!collided) {  
-                    rotation = 0;
-                    setPlayer({
-                        ...player,
-                        rotation,
-                        position,
-                        tetromino: {
-                            ...player.tetromino,
-                            shape
-                        }
-                    });
-                    return;
-                }
-            }
-        }
-    }
-    
-
-
-    return false;
-};
+    };
 
 const kick = ({delta, position, shape, board}) => {
+    // Store the desired position after applying the delta to the current position
     const desiredNextPosition = {
         row: position.row + delta.row,
         column: position.column + delta.column
     };
+    // Check if there's a collision with the desired position
     const collided = hasCollision({
         board,
         position: desiredNextPosition,
         shape
     });
-
+    // Check if the desired position is within the board
     const isOnBoard = isWithinBoard({
         board,
         position: desiredNextPosition,
         shape
     });
-
 
     const preventMove = !isOnBoard || (isOnBoard && collided);
     const nextPostion = preventMove ? position: desiredNextPosition;
@@ -240,23 +98,25 @@ const kick = ({delta, position, shape, board}) => {
 
 export const movePlayer = ({ delta, position, shape, board, setGameOver}) => {
 
+    // Store the desired position after applying the delta to the current position
     const desiredNextPosition = {
         row: position.row + delta.row,
         column: position.column + delta.column
     };
-
+    // Check if there's a collision with the desired position
     const collided = hasCollision({
         board,
         position: desiredNextPosition,
         shape
     });
-
+    // Check if the desired position is within the board
     const isOnBoard = isWithinBoard({
         board,
         position: desiredNextPosition,
         shape
     });
 
+    
     const preventMove = !isOnBoard || (isOnBoard && collided);
     const nextPostion = preventMove ? position: desiredNextPosition;
 
@@ -286,7 +146,7 @@ export const nextMove = ({
 
 const attemptMovement = ({ 
     board, 
-    action, 
+    key, 
     player, 
     setPlayer, 
     setGameOver,
@@ -295,18 +155,19 @@ const attemptMovement = ({
     lockDelay,
     collided2,
     setNormalLockDelay,
-    normalLockDelay
+    normalLockDelay,
+    controls
 }) => {
     const delta = { row:0, column:0 };
     let isFastDropping = false;
 
-    if (action === Action.FastDrop) {
+    if (key === controls["fastDrop"]) {
         isFastDropping = true;
-    } else if (action === Action.SlowDrop) {
+    } else if (key === controls["slowDrop"]) {
         delta.row += 1;
-    } else if (action === Action.Left) {
+    } else if (key === controls["left"]) {
         delta.column -= 1;
-    } else if (action === Action.Right) {
+    } else if (key === controls["right"]) {
         delta.column += 1;
     }
     const { collided, nextPostion, preventMove } = movePlayer({
@@ -350,10 +211,10 @@ const attemptMovement = ({
         return;
     }
 
-    if (collided2 && !preventMove && ((action === Action.Right) || (action === Action.Left) || (action === Action.Rotate)) && (lockDelay === false)) {
+    if (collided2 && !preventMove && ((key === controls["right"]) || (key === controls["left"]) || (key === controls["rotateRight"]) || (key === controls["rotateLeft"])) && (lockDelay === false)) {
         resetDropTime(3000);
         setLockDelay(true);
-    } else if (collided2 && preventMove && ((action === Action.Right) || (action === Action.Left) || (action === Action.Rotate)) && (lockDelay === true)) {
+    } else if (collided2 && preventMove && ((key === controls["right"]) || (key === controls["left"]) || (key === controls["rotateRight"]) || (key === controls["rotateLeft"])) && (lockDelay === true)) {
         setLockDelay(false);
         resetDropTime();
     }
@@ -371,17 +232,23 @@ const AttemptHold = ({
     hold,
     swapHold,
     player,
-    setPlayer
+    setPlayer,
+    previousHold, 
+    setPreviousHold
 }) => {
-    let previousHold;
-
+    // store the current hold key
+    const holdKey = hold.key
+    // check if the previous hold is the current player
     if (previousHold === player.key){
         return
     }else {
-        previousHold = hold.key;
+        setPreviousHold(hold.key);
+        // create a temporary palyer set to the current hold 
         const playerTetromino = hold;
         swapHold(player);
+        // set the current player to the old hold Tetromino
         player.tetrominoes[4] = playerTetromino;
+        player.key = holdKey
     }
 
     setPlayer({
@@ -390,12 +257,13 @@ const AttemptHold = ({
         position: { row: 0, column: 4 },
         tetrominoes: player.tetrominoes,
         tetromino: player.tetrominoes.pop(),
-        rotation: 0
+        rotation: 0,
+        key: holdKey
     });
 }
 
 export const playerController = ({
-    action,
+    key,
     board,
     player,
     setPlayer,
@@ -409,20 +277,27 @@ export const playerController = ({
     lockDelay,
     collided2,
     setNormalLockDelay,
-    normalLockDelay
+    normalLockDelay,
+    previousHold, 
+    setPreviousHold,
+    controls
 }) => {
-    
-    if (!action) {
+    if (!key) {
         return
     };
 
-    if (action === Action.Rotate) {
-        attemptRotation({ board, player, setPlayer });
+    if (key === controls["rotateLeft"]) {
+        let direction = -1;
+        attemptRotation({ board, player, setPlayer, direction});
 
-    } else if (action === Action.Hold) {
+    } else if (key === controls["rotateRight"]) {
+        let direction = 1;
+        attemptRotation({ board, player, setPlayer, direction});
+    }else if (key === controls["hold"]) {
         if (hold.shape.length === 0) {
             swapHold(player);
             resetPlayer();
+            setPreviousHold(0)
 
         } else {
             AttemptHold({
@@ -430,10 +305,26 @@ export const playerController = ({
                 swapHold,
                 player,
                 setPlayer,
+                previousHold, 
+                setPreviousHold
+
+                
             });
 
         }
     } else {
-        attemptMovement({ board, player, setPlayer, action, setGameOver, setLockDelay, resetDropTime, pauseDropTime, lockDelay, collided2, setNormalLockDelay, normalLockDelay });
+        attemptMovement({ board, 
+            player, 
+            setPlayer, 
+            key, 
+            setGameOver, 
+            setLockDelay, 
+            resetDropTime, 
+            pauseDropTime, 
+            lockDelay, 
+            collided2, 
+            setNormalLockDelay, 
+            normalLockDelay,
+            controls });
     }
 }
