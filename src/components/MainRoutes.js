@@ -11,6 +11,7 @@ import LeaderBoard from "./LeaderBoard";
 import FortyLines from "./ForyLines";
 import TwoMinute from "./TwoMinute";
 import Master from "./Master";
+import Multiplayer from "./Multiplayer";
 
 
 const MainRoutes = ({ username }) => {    
@@ -19,7 +20,7 @@ const MainRoutes = ({ username }) => {
     const [isSettings, setIsSettings] = useState(false)
     const [isShowLogin, setIsShowLogin] = useState(true);
     const [gameOver, setGameOver, resetGameOver] = useGameOver()
-    const [controls, changeControls, resetControls] = useControls();
+    const [controls, changeControls, resetControls, multiplayerControls] = useControls();
 
     const handleLoginClick = () => {
         setIsShowLogin((isShowLogin) => !isShowLogin);
@@ -35,12 +36,13 @@ const MainRoutes = ({ username }) => {
         <Route path="/" element={<HomePage isMenu={isMenu} setIsMenu={setIsMenu} isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} gameOver={gameOver}/>}/>
         <Route path="/SinglePlayer">
             <Route index element={<SinglePlayer isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} />}/>
-            <Route path="Marathon" element={<Marathon isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
-            <Route path="2Minute" element={<TwoMinute isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} maxTime={120} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
-            <Route path="40Lines" element={<FortyLines isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} rowLimit={40} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
-            <Route path="Master" element={<Master isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} startLevel={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />}/>
+            <Route path="Marathon" element={<Marathon isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} playerNumber={1} />}/>
+            <Route path="2Minute" element={<TwoMinute isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} maxTime={120} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} playerNumber={1} />}/>
+            <Route path="40Lines" element={<FortyLines isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} rowLimit={40} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} playerNumber={1}/>}/>
+            <Route path="Master" element={<Master isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} startLevel={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} playerNumber={1} />}/>
         </Route>
-        <Route path="/LeaderBoard" element={<LeaderBoard isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username}/>}/>
+        <Route path="/Multiplayer" element={<Multiplayer isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} rows={22} columns={10} gameOver={gameOver} setGameOver={setGameOver} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} multiplayerControls={multiplayerControls} />}/>
+        <Route path="/LeaderBoard" element={<LeaderBoard isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} handleLoginClick={handleLoginClick} username={username} />}/>
     </Routes>
     )
 }

@@ -10,10 +10,9 @@ import { useState } from "react";
 
 import { db, auth } from "../firebase";
 import { getDoc, doc} from "firebase/firestore";
-import GameStats from "./GameStats";
 
 
-const FortyLines = ({isShowLogin, handleLoginClick, username, rows, columns, rowLimit, gameOver, setGameOver, start, controls, changeControls, resetControls, isSettings, setIsSettings}) => {
+const FortyLines = ({isShowLogin, handleLoginClick, username, rows, columns, rowLimit, gameOver, setGameOver, start, controls, changeControls, resetControls, isSettings, setIsSettings, playerNumber}) => {
     const [isBeforeGame, setIsBeforeGame] = useState(true)
     
     const [highScore, setHighScore] = useState("")
@@ -59,7 +58,7 @@ const FortyLines = ({isShowLogin, handleLoginClick, username, rows, columns, row
                 }}>start</div>
         </div>
         ) : (
-            <Game rows={rows} columns={columns} rowLimit={rowLimit} gameOver={gameOver} setGameOver={setGameOver} isBeforeGame={isBeforeGame} setIsBeforeGame={setIsBeforeGame} handleLoginClick={handleLoginClick} username= {username} isShowLogin={isShowLogin} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} />
+            <Game rows={rows} columns={columns} rowLimit={rowLimit} gameOver={gameOver} setGameOver={setGameOver} isBeforeGame={isBeforeGame} setIsBeforeGame={setIsBeforeGame} handleLoginClick={handleLoginClick} username= {username} isShowLogin={isShowLogin} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} playerNumber={playerNumber} />
         )
     )
 }

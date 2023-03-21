@@ -3,12 +3,12 @@ import "./Tetris.css";
 import { useEffect, useState } from "react";
 
 import Board from "./Board";
-import GameStats from "./GameStats";
+import GameStatsRight from "./GameStatsLeft";
+import GameStatsLeft from "./GameStatsRight"; 
 import Previews from "./Previews";
 import Hold from "./Hold";
 import GameController from "./GameController";
 import PauseMenu from "./PauseMenu";
-import Timer from "./Timer";
 
 import { useBoard } from "../hooks/useBoard";
 import { useGameStats} from "../hooks/useGameStats";
@@ -16,9 +16,10 @@ import { usePlayer } from "../hooks/usePlayer";
 import { useHold } from "../hooks/useHold";
 import { usePause } from "../hooks/usePause";
 import { useDropTime } from "../hooks/useDropTime";
+import { useLocation } from "react-router-dom";
 
 
-const Tetris = ({rows, columns, setGameOver, startLevel, rowLimit, maxTime, gameStats, addLinesCleared, time, setTime, highScore, controls, changeControls, resetControls, isSettings, setIsSettings }) => {
+const Tetris = ({rows, columns, setGameOver, startLevel, rowLimit, maxTime, gameStats, addLinesCleared, time, setTime, highScore, controls, changeControls, resetControls, isSettings, setIsSettings, multiplayerControls, playerNumber }) => {
 
     const [pause, setPause, resetPause ] = usePause();
     const [player, setPlayer, resetPlayer] = usePlayer();
@@ -42,14 +43,26 @@ const Tetris = ({rows, columns, setGameOver, startLevel, rowLimit, maxTime, game
     
     const [ gameTime, setGameTime ] = useState(1);
 
+    const location = useLocation();
+
+    const pageName = ((location.pathname).split("/")).pop();
+
     useEffect(() => {
         if (!pause) setIsSettings(false);
     },[pause])
 
+    // useEffect(() => {
+    //     if (pageName == "Multiplayer") setControls(...controls)
+    // },[])
+
+
+
     return (
+
         <div className="Tetris">
             <Board board={board}/>
-            <GameStats gameStats={gameStats} rowLimit={rowLimit} pause={pause} setGameOver={setGameOver} maxTime={maxTime} time={time} setTime={setTime} highScore={highScore} />
+            <GameStatsLeft gameStats={gameStats} rowLimit={rowLimit} pause={pause} setGameOver={setGameOver} maxTime={maxTime} time={time} setTime={setTime} highScore={highScore} />
+            <GameStatsRight gameStats={gameStats} rowLimit={rowLimit} pause={pause} setGameOver={setGameOver} maxTime={maxTime} time={time} setTime={setTime} highScore={highScore} />
             <Previews tetrominoes={player.tetrominoes} />
             <Hold 
                 hold={hold}
@@ -73,6 +86,9 @@ const Tetris = ({rows, columns, setGameOver, startLevel, rowLimit, maxTime, game
                 gameTime={gameTime} 
                 setGameTime={setGameTime}
                 controls={controls}
+                pageName={pageName}
+                multiplayerControls={multiplayerControls}
+                playerNumber={playerNumber}
 
             />
             {pause ? (
@@ -80,6 +96,7 @@ const Tetris = ({rows, columns, setGameOver, startLevel, rowLimit, maxTime, game
            ) : (
             <></>
            )} 
+           {/* <FPSStats top={"85vh"} right={"48vw"} left={"auto"} /> */}
         </div>
         
     )

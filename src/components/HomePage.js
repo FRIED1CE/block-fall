@@ -32,6 +32,7 @@ const HomePage = ({isMenu, setIsMenu,isShowLogin, handleLoginClick, username, co
                 <img src={logo} className="logo" alt="error" />
                 <div className="UserInterface-Bottom fade">
                     <Link to="/SinglePlayer"><div>SinglePlayer</div></Link>
+                    <Link to="/Multiplayer"><div>Multiplayer</div></Link>
                     <Link to="/Leaderboard"><div>Leaderboard</div></Link>
                     <div onClick={() => setIsSettings(true)}>Settings</div>
                 </div>

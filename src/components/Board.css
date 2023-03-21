@@ -12,11 +12,11 @@
   border-bottom-right-radius: 0;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.board-container{
+/* .board-container{
   margin: 2em auto;
   display: flex;
   width: 22vw;
-}
+} */
 .barrier{
   height: 77vh;
   width: 1.5vw;

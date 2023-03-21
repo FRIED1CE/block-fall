@@ -31,8 +31,8 @@ const Menu = ({gameStats, handleLoginClick, username, isShowLogin, setGameOver, 
             currentTime = (today.getHours() > 9 ? today.getHours() : '0' + today.getHours()) + ':' +
             (today.getMinutes() > 9 ? today.getMinutes() : '0' + today.getMinutes()) + ':'
             + (today.getSeconds() > 9 ? today.getSeconds() : '0' + today.getSeconds())
-
-   if (!rowLimit && (!highScore || highScore < gameStats.points) ) {
+    if (pageName == "Multiplayer") ;
+    else if (!rowLimit && (!highScore || highScore < gameStats.points) ) {
       addLeaderboardEntry(username, pageName, gameStats.points, date, currentTime);
     } else if ((rowLimit && gameStats.linesCompleted >= rowLimit) && (!highScore || highScore < time)) {
       addLeaderboardEntry(username, pageName, time, date, currentTime);

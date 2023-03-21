@@ -6,7 +6,7 @@ import backArrow from "./images/Backarrow.png"
 
 const Settings = ({ controls, changeControls, resetControls, isSettings, setIsSettings, gameOver}) => {
 
-    const keys = Object.keys(controls)
+    const keys = Object.keys(controls[1])
 
     const [buttonClicked, setButtonClicked] = useState(false);
     const [active, setActive] = useState("")
@@ -39,7 +39,7 @@ const Settings = ({ controls, changeControls, resetControls, isSettings, setIsSe
                         <button onClick={() => {
                             setActive(key)
                             setButtonClicked(true)
-                        }}>{(controls[key] === " ") ? ("space"): (controls[key])}</button>
+                        }}>{(controls[1][key] === " ") ? ("space"): (controls[1][key])}</button>
                     </div>
                 ))}
                 <div onClick={()=> resetControls()}className="reset">Reset controls</div>

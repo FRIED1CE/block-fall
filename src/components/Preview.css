@@ -12,7 +12,7 @@
     width: 5vw;
     height: 5vw;
   }
-  .preview-container{
+  /* .preview-container{
     position: absolute;
     top: 0;
     left: 60.4vw;
@@ -22,7 +22,7 @@
     border-left: 0;
     align-items: center;
     border-bottom-right-radius: 10px;
-  }
+  } */
   .preview-title{
     color: black;
     background-color: white;

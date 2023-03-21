@@ -13,7 +13,7 @@ import { getDoc, doc} from "firebase/firestore";
 
 
 
-const Marathon = ({isShowLogin, handleLoginClick, username, rows, columns, gameOver, setGameOver, start, controls, changeControls, resetControls, isSettings, setIsSettings}) => {
+const Marathon = ({isShowLogin, handleLoginClick, username, rows, columns, gameOver, setGameOver, start, controls, changeControls, resetControls, isSettings, setIsSettings, playerNumber}) => {
 
     const [isBeforeGame, setIsBeforeGame] = useState(true)
     const [highScore, setHighScore] = useState("")
@@ -51,7 +51,7 @@ const Marathon = ({isShowLogin, handleLoginClick, username, rows, columns, gameO
                 }}>start</div>
         </div>
         ) : (
-            <Game rows={rows} columns={columns} gameOver={gameOver} setGameOver={setGameOver} isBeforeGame={isBeforeGame} setIsBeforeGame={setIsBeforeGame} handleLoginClick={handleLoginClick} username= {username} isShowLogin={isShowLogin} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings}/>
+            <Game rows={rows} columns={columns} gameOver={gameOver} setGameOver={setGameOver} isBeforeGame={isBeforeGame} setIsBeforeGame={setIsBeforeGame} handleLoginClick={handleLoginClick} username= {username} isShowLogin={isShowLogin} start={start} controls={controls} changeControls={changeControls} resetControls={resetControls} isSettings={isSettings} setIsSettings={setIsSettings} playerNumber={playerNumber} />
         )
     )
 }

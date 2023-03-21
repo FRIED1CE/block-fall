@@ -156,18 +156,19 @@ const attemptMovement = ({
     collided2,
     setNormalLockDelay,
     normalLockDelay,
-    controls
+    controls,
+    playerNumber
 }) => {
     const delta = { row:0, column:0 };
     let isFastDropping = false;
 
-    if (key === controls["fastDrop"]) {
+    if (key === controls[playerNumber]["fastDrop"]) {
         isFastDropping = true;
-    } else if (key === controls["slowDrop"]) {
+    } else if (key === controls[playerNumber]["slowDrop"]) {
         delta.row += 1;
-    } else if (key === controls["left"]) {
+    } else if (key === controls[playerNumber]["left"]) {
         delta.column -= 1;
-    } else if (key === controls["right"]) {
+    } else if (key === controls[playerNumber]["right"]) {
         delta.column += 1;
     }
     const { collided, nextPostion, preventMove } = movePlayer({
@@ -211,10 +212,10 @@ const attemptMovement = ({
         return;
     }
 
-    if (collided2 && !preventMove && ((key === controls["right"]) || (key === controls["left"]) || (key === controls["rotateRight"]) || (key === controls["rotateLeft"])) && (lockDelay === false)) {
+    if (collided2 && !preventMove && ((key === controls[playerNumber]["right"]) || (key === controls[playerNumber]["left"]) || (key === controls[playerNumber]["rotateRight"]) || (key === controls[playerNumber]["rotateLeft"])) && (lockDelay === false)) {
         resetDropTime(3000);
         setLockDelay(true);
-    } else if (collided2 && preventMove && ((key === controls["right"]) || (key === controls["left"]) || (key === controls["rotateRight"]) || (key === controls["rotateLeft"])) && (lockDelay === true)) {
+    } else if (collided2 && preventMove && ((key === controls[playerNumber]["right"]) || (key === controls[playerNumber]["left"]) || (key === controls[playerNumber]["rotateRight"]) || (key === controls[playerNumber]["rotateLeft"])) && (lockDelay === true)) {
         setLockDelay(false);
         resetDropTime();
     }
@@ -280,20 +281,22 @@ export const playerController = ({
     normalLockDelay,
     previousHold, 
     setPreviousHold,
-    controls
+    controls,
+    playerNumber
 }) => {
     if (!key) {
         return
     };
 
-    if (key === controls["rotateLeft"]) {
+
+    if (key === controls[playerNumber]["rotateLeft"]) {
         let direction = -1;
         attemptRotation({ board, player, setPlayer, direction});
 
-    } else if (key === controls["rotateRight"]) {
+    } else if (key === controls[playerNumber]["rotateRight"]) {
         let direction = 1;
         attemptRotation({ board, player, setPlayer, direction});
-    }else if (key === controls["hold"]) {
+    }else if (key === controls[playerNumber]["hold"]) {
         if (hold.shape.length === 0) {
             swapHold(player);
             resetPlayer();
@@ -307,8 +310,6 @@ export const playerController = ({
                 setPlayer,
                 previousHold, 
                 setPreviousHold
-
-                
             });
 
         }
@@ -325,6 +326,8 @@ export const playerController = ({
             collided2, 
             setNormalLockDelay, 
             normalLockDelay,
-            controls });
+            controls,
+            playerNumber
+         });
     }
 }

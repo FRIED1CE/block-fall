@@ -1,4 +1,4 @@
-.Hold {
+/* .Hold {
     position: absolute;
     top: 0;
     left: 31.95vw;
@@ -7,7 +7,7 @@
     border-right: 0;
     border-bottom-left-radius: 10px;
     width: 7vw;
-  }
+  } */
   
 .Hold-board {
     display: grid;

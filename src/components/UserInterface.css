@@ -577,3 +577,63 @@
 .logout {
   transform: rotate(180deg);
 }
+
+.board-container{
+  display: flex;
+  width: 22vw;
+  grid-column: 2;
+  grid-row: 1 / span 3;
+
+}
+
+.preview-container{
+  background: rgb(32, 0, 64);
+  width: 7.5vw;
+  border: 2px solid white;
+  border-left: 0;
+  align-items: center;
+  border-bottom-right-radius: 10px;
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+}
+
+.Hold {
+  background: rgb(32, 0, 64);
+  border: 2px solid white;
+  border-right: 0;
+  border-bottom-left-radius: 10px;
+  width: 7vw;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+.GameStats__left {
+  grid-column: 1;
+  grid-row: 2;
+  text-align: right;
+  align-self: center;
+  justify-self: center;
+}
+
+.GameStats__right {
+  grid-column: 3;
+  grid-row: 2;
+  text-align: left;
+  align-self: center;
+  justify-self: center;
+}
+
+.Tetris {
+  position: relative;
+  display: grid;
+  margin: 2em auto;
+  width: 36vw;
+  grid-template-rows: 35vh 42vh;
+  grid-template-columns: 7vw 21.5vw 7.5vw;
+}
+
+.Multiplayer{
+  display: flex;
+  justify-content: space-evenly;
+}

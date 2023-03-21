@@ -2,15 +2,42 @@ import { useState, useCallback } from "react"
 
 // initial controls
 const initialControls = () => ({
+    1: {
+        "rotateRight": "ArrowUp",
+        "rotateLeft": "x",
+        "slowDrop": "ArrowDown",
+        "left": "ArrowLeft",
+        "right": "ArrowRight",
+        "quit": "q",
+        "pause": "p",
+        "fastDrop": " ",
+        "hold": "c"
+    }
+});
+
+const multiplayer = () => ({
+    1 : {
     "rotateRight": "ArrowUp",
-    "rotateLeft": "x",
+    "rotateLeft": ",",
     "slowDrop": "ArrowDown",
     "left": "ArrowLeft",
     "right": "ArrowRight",
     "quit": "q",
     "pause": "p",
-    "fastDrop": " ",
-    "hold": "c"
+    "fastDrop": "/",
+    "hold": "."
+    }, 
+    2 : {
+        "rotateRight": "w",
+        "rotateLeft": "e",
+        "slowDrop": "s",
+        "left": "a",
+        "right": "d",
+        "quit": "q",
+        "pause": "p",
+        "fastDrop": " ",
+        "hold": "c"
+    }
 });
 
 
@@ -36,6 +63,10 @@ export const useControls = () => {
         setControls(initialControls);
     }
 
-    return [controls, changeControls, resetControls]
+    const multiplayerControls = () => {
+        setControls(multiplayer)
+    }
+
+    return [controls, changeControls, resetControls, multiplayerControls]
 }
 

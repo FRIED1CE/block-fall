@@ -1,12 +1,10 @@
 .GameStats {
-  position: absolute;
-  width: 22vw;
   list-style-type: none;
   color: white(255, 255, 255, 0.5);
   font-weight: bold;
 }
 
-.GameStats__left {
+/* .GameStats__left {
   left: 61vw;
   bottom: 13vh;
   text-align: left;
@@ -16,7 +14,7 @@
   right: 61.5vw;
   bottom: 0;
   text-align: right;
-}
+} */
 
 .GameStats .value {
   font-size: 1.5rem;

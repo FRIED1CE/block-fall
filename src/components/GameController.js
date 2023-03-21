@@ -6,6 +6,7 @@ import { playerController, nextMove } from "../buisness/PlayerController";
  
 import { useInterval } from "../hooks/useInterval";
 import { useLockDelay, useNormalLockDelay, useLockCount } from "../hooks/useLockDelay";
+import { useLocation } from "react-router-dom";
 
 
 const GameController = ({
@@ -28,7 +29,10 @@ const GameController = ({
     time, 
     gameTime, 
     setGameTime,
-    controls
+    controls,
+    pageName,
+    multiplayerControls,
+    playerNumber
 }) => {
     const [lockDelay, setLockDelay] = useLockDelay();
     const [normalLockDelay, setNormalLockDelay] = useNormalLockDelay();
@@ -36,9 +40,8 @@ const GameController = ({
     const {collided2} = nextMove({board, player, setGameOver});
 
     const [previousHold, setPreviousHold] = useState(null);
-
     useInterval(() => {
-         handleInput(controls["slowDrop"]);
+         handleInput(controls[1]["slowDrop"]);
     }, dropTime);
 
     useEffect(() => {
@@ -47,17 +50,17 @@ const GameController = ({
 
     const handleUserKeyPressdown = event => {
         const { key } = event;
-        if (pause === true && key !== controls["pause"]){
+        if (pause === true && key !== controls[playerNumber]["pause"]){
             return;
         }
-        if (key === controls["rotateLeft"] || key === controls["rotateRight"] || key === controls["pause"]) {
+        if (key === controls[playerNumber]["rotateLeft"] || key === controls[playerNumber]["rotateRight"] || key === controls[playerNumber]["pause"]) {
             return; 
-        } else if (key === controls["quit"]) {
+        } else if (key === controls[playerNumber]["quit"]) {
             setGameOver(true);
             return;
         }
         
-        if (key === controls["fastDrop"] || key === controls["slowDrop"]) {
+        if (key === controls[playerNumber]["fastDrop"] || key === controls[playerNumber]["slowDrop"]) {
             pauseDropTime()
             handleInput(key)
         } else {
@@ -71,7 +74,7 @@ const GameController = ({
         
         const { collided } = nextMove({board, player, setGameOver});
 
-        if (pause === true && key !== controls["pause"]){
+        if (pause === true && key !== controls[playerNumber]["pause"]){
             return;
         }
         
@@ -80,11 +83,11 @@ const GameController = ({
             resetDropTime();
         }
 
-        if (key === controls["fastDrop"] || key === controls["slowDrop"]){
+        if (key === controls[playerNumber]["fastDrop"] || key === controls[playerNumber]["slowDrop"]){
             resumeDropTime();
-        } else if (key === controls["rotateLeft"] || key === controls["rotateRight"]){
+        } else if (key === controls[playerNumber]["rotateLeft"] || key === controls[playerNumber]["rotateRight"]){
             handleInput(key)
-        } else if (key === controls["pause"]) {
+        } else if (key === controls[playerNumber]["pause"] && pageName != "Multiplayer") {
             if (dropTime) {
                 pauseDropTime();
                 setPause(true);
@@ -142,7 +145,8 @@ const GameController = ({
             setLockCount,
             previousHold,
             setPreviousHold,
-            controls
+            controls,
+            playerNumber
             
         });
     };
